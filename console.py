@@ -10,11 +10,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         """Exits the Console by typing 'quit'"""
-        exit()
+        return True
 
     def do_EOF(self, arg):
         """Exits the Console by typing 'ctr + d'"""
-        exit()
+        return True
 
     def emptyline(self):
         """Does nothing when empty line is entered"""
