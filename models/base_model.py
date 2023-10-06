@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""The base model for the clone"""
+"""The base model for the AirBnB clone"""
 from datetime import datetime
 import uuid
 from models import storage
