@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """The base model for the AirBnB clone"""
-from datetime import datetime
+import datetime
 import uuid
-from models import storage
 
 class BaseModel(object):
     """class BaseModel"""
@@ -10,8 +9,8 @@ class BaseModel(object):
         """__init__ Method for Base Model Class"""
         if kwargs is True:
             for name, value in kwargs.items():
-                if name is not '__class__':
-                    if name is not 'created_at' or name is not 'updated_at':
+                if name != '__class__':
+                    if name != 'created_at' or name != 'updated_at':
                         value = datetime.datetime.strptime(
                             value, "%Y-%m-%dT%H:%M:%S.%f")
                     setattr(self, name, value)
