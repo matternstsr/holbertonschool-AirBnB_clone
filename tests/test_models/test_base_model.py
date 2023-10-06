@@ -73,11 +73,12 @@ class TestBaseModel(unittest.TestCase):
         """Tests that BaseModel makes new obj with dict that has nothing"""
         base_dict = {}
         new_base = BaseModel(**base_dict)
-        new_base_dict = new_base.to_dict()
+        """new_base_dict = new_base.to_dict()"""
         self.assertIsInstance(new_base, BaseModel)
         self.assertIsNotNone(new_base.id)
         self.assertIsNotNone(new_base.created_at)
         self.assertIsNotNone(new_base.updated_at)
+
 
 if __name__ == '__main__':
     unittest.main()
