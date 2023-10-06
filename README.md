@@ -39,3 +39,13 @@
 |test_review.py| Contains Unit Tests for Class review|
 |test_state.py| Contains Unit Tests for Class state|
 |test_user.py| Contains Unit Tests for Class user|
+|models| Contains all files for models|
+|engine| Contains file_storage.py file|
+|amenity.py| Contains all attribute and methods for Class amenity|
+|base_models.py| Contains all attribute and methods for Class base_model|
+|city.py|Contains all attribute and methods for Class city|
+|review.py| Contains all attribute and methods for Class review.py|
+|state.py| Contains all attribute and methods for Class state|
+|user.py| Contains all attribute and methods for Class user|
+|console.py| File for creating and running an interactive console|
+|AUTHORS| File containing authors of the project|
