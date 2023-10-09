@@ -12,7 +12,7 @@ class BaseModel():
         if len(kwargs) != 0:
             for name, value in kwargs.items():
                 if name != '__class__':
-                    if name != 'created_at' or name != 'updated_at':
+                    if name == 'created_at' or name == 'updated_at':
                         value = datetime.datetime.strptime(value, d_t)
                     setattr(self, name, value)
         else:
