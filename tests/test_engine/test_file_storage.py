@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """FileStorage unittests"""
+
+import os
 import unittest
-from os import remove
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 
@@ -51,13 +52,23 @@ class TestFileStorage(unittest.TestCase):
             self.fail("File not found")
 
     def test_file_storage_save_method_raises_exception_on_inv_file_path(self):
-        """FileStorage save method raise an except on an invalid file path"""
+        """FileStorage save method should raise an exception on an invalid file path"""
         storage = FileStorage()
         base = BaseModel()
         base.save()
-        with self.assertRaises(FileNotFoundError):
-            with open('invalid_path.json', 'r'):
-                remove('invalid_path.json')
+        invalid_path = 'invalid_path.json'
+        try:
+            with open(invalid_path, 'r'):
+                pass
+        except FileNotFoundError:
+            """ Expected behavior: File is not found, which is correct"""
+            pass
+        else:
+            self.fail(f"File '{invalid_path}' should not exist")
+
+        """ Clean up by removing the invalid file path if it exists"""
+        if os.path.exists(invalid_path):
+            os.remove(invalid_path)
 
 
 if __name__ == '__main__':
