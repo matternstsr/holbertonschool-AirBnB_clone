@@ -30,18 +30,16 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(self.base.created_at, datetime.datetime)
         self.assertIsInstance(self.base.updated_at, datetime.datetime)
 
-
     def test_updated_at_same_as_created_at(self):
-        """Test that BaseModel updated_at is the same as created_at initially"""
+        """Test that BaseModel updated_at is
+        the same as created_at initially"""
         self.assertEqual(self.base.updated_at, self.base.created_at)
-
 
     def test_str_representation(self):
         """Test the __str__ method of BaseModel"""
         base_str = str(self.base)
         self.assertIsInstance(base_str, str)
         self.assertTrue(base_str.startswith('[BaseModel]'))
-
 
     def test_save_method(self):
         """Test the save method of BaseModel"""
@@ -58,6 +56,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn('created_at', base_dict)
         self.assertIn('updated_at', base_dict)
         self.assertIn('id', base_dict)
+
 
 if __name__ == '__main__':
     unittest.main()
