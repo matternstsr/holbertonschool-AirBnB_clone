@@ -8,12 +8,12 @@ class BaseModel():
     """class BaseModel"""
     def __init__(self, *args, **kwargs):
         """__init__ Method for Base Model Class"""
+        d_t = "%Y-%m-%dT%H:%M:%S.%f"
         if len(kwargs) != 0:
             for name, value in kwargs.items():
                 if name != '__class__':
                     if name != 'created_at' or name != 'updated_at':
-                        value = datetime.datetime.strptime(
-                            value, "%Y-%m-%dT%H:%M:%S.%f")
+                        value = datetime.datetime.strptime(value, d_t)
                     setattr(self, name, value)
         else:
             self.id = str(uuid.uuid4())
