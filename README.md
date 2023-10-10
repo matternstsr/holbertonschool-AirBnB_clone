@@ -72,6 +72,14 @@ where you can type commands and get output. For example:
 ["[User] (00155f6d-b153-4740-bb49-a00abf2863b6) {'id': '00155f6d-b153-4740-bb49-a00abf2863b6', 'created_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451703), 'updated_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451710), 'first_name': 'Betty', 'last_name': 'Bar', 'email': 'airbnb@mail.com', 'password': 'root'}", "[User] (8d277805-bae6-4279-8e5e-7c80ca608e02) {'id': '8d277805-bae6-4279-8e5e-7c80ca608e02', 'created_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451946), 'updated_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451951), 'first_name': 'John', 'email': 'airbnb2@mail.com', 'password': 'root'}"]
 ```
 
+where you can type update and attributes For example:
+
+```bash
+(hbnb) update Place d55c63aa-a1a8-4e72-a2cf-3297decfd2e1 name Jeff
+(hbnb) show Place d55c63aa-a1a8-4e72-a2cf-3297decfd2e1
+["Place] (d55c63aa-a1a8-4e72-a2cf-3297decfd2e1) {'id': 'd55c63aa-a1a8-4e72-a2cf-3297decfd2e1', 'created_at': datetime.datetime(2023, 10, 10, 13, 15, 37, 963256), 'updated_at': datetime.datetime(2023, 10, 10, 13, 42, 26, 469951), 'name': 'Jeff'}"]"
+```
+
 ### Non-interactive mode
 
 The same commands can be used to run non-interactive mode with some modifications will produce the same results as above:
