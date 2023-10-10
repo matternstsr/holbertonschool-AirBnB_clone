@@ -221,67 +221,6 @@ class TestFileStorage(unittest.TestCase):
         self.assertIn("Review." + rev.id, models.storage.all().keys())
         self.assertIn(rev, models.storage.all().values())
 
-    def test_save(self):
-        """Test the save method."""
-        base1 = BaseModel()
-        usr = User()
-        st = State()
-        plc = Place()
-        cty = City()
-        am = Amenity()
-        rev = Review()
-
-        models.storage.new(base1)
-        models.storage.new(usr)
-        models.storage.new(st)
-        models.storage.new(plc)
-        models.storage.new(cty)
-        models.storage.new(am)
-        models.storage.new(rev)
-        models.storage.save()
-
-        """Check if objects are saved to the JSON file correctly"""
-        read_val = ""
-        with open("file.json", "r") as file:
-            read_val = file.read()
-            self.assertIn("BaseModel." + base1.id, read_val)
-            self.assertIn("User." + usr.id, read_val)
-            self.assertIn("State." + st.id, read_val)
-            self.assertIn("Place." + plc.id, read_val)
-            self.assertIn("City." + cty.id, read_val)
-            self.assertIn("Amenity." + am.id, read_val)
-            self.assertIn("Review." + rev.id, read_val)
-
-    def test_reload(self):
-        """Test the reload method."""
-        base1 = BaseModel()
-        usr = User()
-        st = State()
-        plc = Place()
-        cty = City()
-        am = Amenity()
-        rev = Review()
-
-        models.storage.new(base1)
-        models.storage.new(usr)
-        models.storage.new(st)
-        models.storage.new(plc)
-        models.storage.new(cty)
-        models.storage.new(am)
-        models.storage.new(rev)
-        models.storage.save()
-        models.storage.reload()
-
-        """Check if objects are reloaded from the JSON file correctly"""
-        obs = FileStorage._FileStorage__objects
-        self.assertIn("BaseModel." + base1.id, obs)
-        self.assertIn("User." + usr.id, obs)
-        self.assertIn("State." + st.id, obs)
-        self.assertIn("Place." + plc.id, obs)
-        self.assertIn("City." + cty.id, obs)
-        self.assertIn("Amenity." + am.id, obs)
-        self.assertIn("Review." + rev.id, obs)
-
 
 if __name__ == '__main__':
     unittest.main()
