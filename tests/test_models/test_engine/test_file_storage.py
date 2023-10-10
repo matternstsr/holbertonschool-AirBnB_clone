@@ -144,7 +144,7 @@ class TestFileStorage(unittest.TestCase):
         """Test if the objects attribute is of type dict"""
         self.assertEqual(type(models.storage._FileStorage__objects), dict)
 
-    """ invalid argument types"""
+    """ Tests invalid argument types"""
 
     def test_save_with_invalid_argument(self):
         with self.assertRaises(TypeError):
@@ -154,7 +154,27 @@ class TestFileStorage(unittest.TestCase):
         with self.assertRaises(TypeError):
             models.storage.reload(int())
 
-    """ invalid Class types"""
+    """ Tests related to invalid argument types:"""
+
+    def test_save_with_arguments(self):
+        with self.assertRaises(TypeError):
+            models.storage.save(None)
+
+    def test_reload_with_arguments(self):
+        with self.assertRaises(TypeError):
+            models.storage.reload([1, 2, 3])
+
+    def test_FileStorage_file_path_private_and_str(self):
+        """Check if __file_path attribute is a private string attribute."""
+        self.assertEqual(str, type(FileStorage._FileStorage__file_path))
+
+    def test_FileStorage_objects_private_and_dict(self):
+        """Check if __objects attribute is a private dictionary attribute."""
+        self.assertEqual(dict, type(FileStorage._FileStorage__objects))
+
+    def test_storage(self):
+        """Check if models.storage is an instance of FileStorage."""
+        self.assertEqual(type(models.storage), FileStorage)
 
 
 if __name__ == '__main__':
