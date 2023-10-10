@@ -110,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
 
         splarg = arg.split()
         if len(splarg) == 0:
-            print("**class name missing**")
+            print("** class name missing **")
         elif len(splarg) < 2:
             print("** instance id missing **")
         elif len(splarg) < 3:
