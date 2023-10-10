@@ -2,13 +2,13 @@
 """Defines a Class HBNBCommand"""
 import cmd
 from datetime import datetime
-from models import BaseModel
-from models import User
-from models import State
-from models import City
-from models import Amenity
-from models import Place
-from models import Review
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -60,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
         if "{}.{}".format(splarg[0], splarg[1]) not in saved_inst.keys:
             print("** no instance found **")
         else:
-            print(saved_inst[{}.{}.format(splarg[0], splarg[1])])
+            print(saved_inst["{}.{}".format(splarg[0], splarg[1])])
 
     def do_destroy(self, arg):
         """Deletes a specified instance of an Object"""
@@ -79,25 +79,25 @@ class HBNBCommand(cmd.Cmd):
         if "{}.{}".format(splarg[0], splarg[1]) not in saved_inst.keys:
             print("** no instance found **")
         else:
-            del saved_inst[{}.{}.format(splarg[0], splarg[1])]
+            del saved_inst["{}.{}".format(splarg[0], splarg[1])]
             storage.save()
 
     def do_all(self, arg):
         """Prints a list of all instances of all classes, or all
             instances of a specified class"""
 
-    splarg = arg.split()
-    inst_list = []
-    if len(splarg) > 0:
-        if splarg[0] not in HBNBCommand.__classes.keys():
-            print("** class doesn't exist **")
+        splarg = arg.split()
+        inst_list = []
+        if len(splarg) > 0:
+            if splarg[0] not in HBNBCommand.__classes.keys():
+                print("** class doesn't exist **")
+            else:
+                for key,value in storage.all():
+                    if slarg[0] == key:
+                        inst_list.append(key, value)
         else:
-            for key,value in storage.all():
-                if slarg[0] == key:
-                    inst_list.append(key, value)
-    else:
-        for key, value in storage.all():
-            inst_list.append(key, value)
+            for key, value in storage.all():
+                inst_list.append(key, value)
 
     def do_update(self, arg):
         """ Updates the specified attribute of a class, only one
@@ -127,7 +127,6 @@ class HBNBCommand(cmd.Cmd):
             setattr(inst_data, args[2], args[3])
             setattr(inst_data, 'updated_at', datetime.now())
             storage.save()
-
 
 
 if __name__ == '__main__':
