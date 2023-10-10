@@ -57,21 +57,19 @@ class HBNBCommand(cmd.Cmd):
         """Deletes a specified instance of an Object"""
 
         splarg = arg.split()
-        saved_inst = storage.all()
         if len(splarg) == 0:
             print("**class name missing**")
+        elif splarg[0] not in storage.classes:
+            print("** class doesn't exist **")
         elif len(splarg) < 2:
             print("** instance id missing **")
-        elif splarg[0] not in HBNBCommand.__classes.keys():
-            print("** class doesn't exist **")
-        for key, value in HBNBCommnad.__classes.items():
-                if splarg[0] == key:
-                    splarg[0] = value
-        if "{}.{}".format(splarg[0], splarg[1]) not in saved_inst.keys:
-            print("** no instance found **")
         else:
-            del saved_inst["{}.{}".format(splarg[0], splarg[1])]
-            storage.save()
+            key = "{}.{}".format(splarg[0], splarg[1])
+            if key in storage.all().keys():
+                del instances[key]
+                storage.save()
+            else:
+                print("** no instance found **")
 
     def do_all(self, arg):
         """Prints a list of all instances of all classes, or all
