@@ -91,6 +91,12 @@ class HBNBCommand(cmd.Cmd):
         if splarg[0] not in HBNBCommand.__classes.keys():
             print("** class doesn't exist **")
         else:
+            for key,value in storage.all():
+                if slarg[0] == key:
+                    inst_list.append(key, value)
+    else:
+        for key, value in storage.all():
+            inst_list.append(key, value)
 
 
 
