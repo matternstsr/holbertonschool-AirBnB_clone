@@ -7,6 +7,12 @@ import os
 from os import remove
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class TestFileStorage(unittest.TestCase):
@@ -161,6 +167,7 @@ class TestFileStorage(unittest.TestCase):
             models.storage.save(None)
 
     def test_reload_with_arguments(self):
+        """Test if reload method raises TypeError with invalid arguments."""
         with self.assertRaises(TypeError):
             models.storage.reload([1, 2, 3])
 
@@ -175,6 +182,105 @@ class TestFileStorage(unittest.TestCase):
     def test_storage(self):
         """Check if models.storage is an instance of FileStorage."""
         self.assertEqual(type(models.storage), FileStorage)
+
+    def test_new_with_arguments(self):
+        """Test if new method raises TypeError with invalid arguments."""
+        with self.assertRaises(TypeError):
+            models.storage.new(BaseModel(), 10)
+
+    def test_new(self):
+        """Test adding various model instances to storage."""
+        base1 = BaseModel()
+        usr = User()
+        st = State()
+        plc = Place()
+        cty = City()
+        am = Amenity()
+        rev = Review()
+
+        models.storage.new(base1)
+        models.storage.new(usr)
+        models.storage.new(st)
+        models.storage.new(plc)
+        models.storage.new(cty)
+        models.storage.new(am)
+        models.storage.new(rev)
+
+        self.assertIn("BaseModel." + base1.id, models.storage.all().keys())
+        self.assertIn(base1, models.storage.all().values())
+        self.assertIn("User." + usr.id, models.storage.all().keys())
+        self.assertIn(usr, models.storage.all().values())
+        self.assertIn("State." + st.id, models.storage.all().keys())
+        self.assertIn(st, models.storage.all().values())
+        self.assertIn("Place." + plc.id, models.storage.all().keys())
+        self.assertIn(plc, models.storage.all().values())
+        self.assertIn("City." + cty.id, models.storage.all().keys())
+        self.assertIn(cty, models.storage.all().values())
+        self.assertIn("Amenity." + am.id, models.storage.all().keys())
+        self.assertIn(am, models.storage.all().values())
+        self.assertIn("Review." + rev.id, models.storage.all().keys())
+        self.assertIn(rev, models.storage.all().values())
+
+    def test_save(self):
+        """Test the save method."""
+        base1 = BaseModel()
+        usr = User()
+        st = State()
+        plc = Place()
+        cty = City()
+        am = Amenity()
+        rev = Review()
+
+        models.storage.new(base1)
+        models.storage.new(usr)
+        models.storage.new(st)
+        models.storage.new(plc)
+        models.storage.new(cty)
+        models.storage.new(am)
+        models.storage.new(rev)
+        models.storage.save()
+
+        """Check if objects are saved to the JSON file correctly"""
+        read_val = ""
+        with open("file.json", "r") as file:
+            read_val = file.read()
+            self.assertIn("BaseModel." + base1.id, read_val)
+            self.assertIn("User." + usr.id, read_val)
+            self.assertIn("State." + st.id, read_val)
+            self.assertIn("Place." + plc.id, read_val)
+            self.assertIn("City." + cty.id, read_val)
+            self.assertIn("Amenity." + am.id, read_val)
+            self.assertIn("Review." + rev.id, read_val)
+
+    def test_reload(self):
+        """Test the reload method."""
+        base1 = BaseModel()
+        usr = User()
+        st = State()
+        plc = Place()
+        cty = City()
+        am = Amenity()
+        rev = Review()
+
+        models.storage.new(base1)
+        models.storage.new(usr)
+        models.storage.new(st)
+        models.storage.new(plc)
+        models.storage.new(cty)
+        models.storage.new(am)
+        models.storage.new(rev)
+        models.storage.save()
+        models.storage.reload()
+
+        """Check if objects are reloaded from the JSON file correctly"""
+        obs = FileStorage._FileStorage__objects
+        self.assertIn("BaseModel." + base1.id, obs)
+        self.assertIn("User." + usr.id, obs)
+        self.assertIn("State." + st.id, obs)
+        self.assertIn("Place." + plc.id, obs)
+        self.assertIn("City." + cty.id, obs)
+        self.assertIn("Amenity." + am.id, obs)
+        self.assertIn("Review." + rev.id, obs)
 
 
 if __name__ == '__main__':
