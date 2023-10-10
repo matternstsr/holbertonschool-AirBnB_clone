@@ -10,6 +10,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review"""
 
+
 class HBNBCommand(cmd.Cmd):
     """ Defines the class HBNBCommand"""
     intro = 'Welcome to HOlberton BNB, type help or ? to list commands.\n'

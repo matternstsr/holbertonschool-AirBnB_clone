@@ -17,12 +17,12 @@ class TestBaseModel(unittest.TestCase):
     def test_instance_and_attributes(self):
         """Check if self.base is an instance of BaseModel"""
         self.assertIsInstance(self.base, BaseModel)
-    
+
         """Check that id, created_at, and updated_at are not None"""
         self.assertIsNotNone(self.base.id)
         self.assertIsNotNone(self.base.created_at)
         self.assertIsNotNone(self.base.updated_at)
-    
+
         """Check that custom_attribute has the expected value (e.g., 100)"""
         self.assertEqual(self.base.custom_attribute, 100)
 

@@ -1,4 +1,5 @@
 #**Project**'AirBnB clone - The console'
+ <p><img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20231010%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20231010T130402Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=d8729bf254b9d83fe12789526454085201f0d5c6db7871dbb092306020fa9bec" alt="" loading='lazy' style="" /></p>
 
 ## Introduction
 > This README is for the AirBnB clone - The console at Holberton. It countains the requirements, list of files, Examples on how use, and Flowcharts.
