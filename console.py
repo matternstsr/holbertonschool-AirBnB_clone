@@ -13,7 +13,6 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """ Defines the class HBNBCommand"""
-    intro = 'Welcome to Holberton BNB, type help or ? to list commands.\n'
     prompt = '(hbnb) '
     allowed_classes = {
         'BaseModel': BaseModel,
