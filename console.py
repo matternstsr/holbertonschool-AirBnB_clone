@@ -1,15 +1,29 @@
 #!/usr/bin/python3
 """Defines a Class HBNBCommand"""
 import cmd
-from datetime import datetime
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
     """ Defines the class HBNBCommand"""
     intro = 'Welcome to Holberton BNB, type help or ? to list commands.\n'
     prompt = '(hbnb) '
+    allowed_classes = {
+        'BaseModel': BaseModel,
+        'User': User,
+        'State': State,
+        'City': City,
+        'Amenity': Amenity,
+        'Place': Place,
+        'Review': Review
+    }
 
     def do_quit(self, arg):
         """Exits the Console by typing 'quit'"""
@@ -29,10 +43,10 @@ class HBNBCommand(cmd.Cmd):
         splarg = arg.split()
         if len(splarg) == 0:
             print("**class name missing**")
-        elif splarg[0] not in storage.classes:
+        elif splarg[0] not in self.allowed_classes:
             print("** class doesn't exist **")
         else:
-            new_instance = storage.classes[splarg[0]]()
+            new_instance = self.allowed_classes[splarg[0]]()
             new_instance.save()
             print(new_instance.id)
 
@@ -42,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
         splarg = arg.split()
         if len(splarg) == 0:
             print("**class name missing**")
-        elif splarg[0] not in storage.classes:
+        elif splarg[0] not in self.allowed_classes:
             print("** class doesn't exist **")
         elif len(splarg) < 2:
             print("** instance id missing **")
@@ -59,13 +73,14 @@ class HBNBCommand(cmd.Cmd):
         splarg = arg.split()
         if len(splarg) == 0:
             print("**class name missing**")
-        elif splarg[0] not in storage.classes:
+        elif splarg[0] not in self.allowed_classes:
             print("** class doesn't exist **")
         elif len(splarg) < 2:
             print("** instance id missing **")
         else:
             key = "{}.{}".format(splarg[0], splarg[1])
             if key in storage.all().keys():
+                instances = storage.all()
                 del instances[key]
                 storage.save()
             else:
@@ -80,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
         if len(splarg) == 0:
             for instance in storage.all().values():
                 inst_list.append(str(instance))
-        elif splarg[0] not in storage.classes:
+        elif splarg[0] not in self.allowed_classes:
             print("** class doesn't exist **")
         else:
             for key, value in storage.all().items():
@@ -93,7 +108,6 @@ class HBNBCommand(cmd.Cmd):
         attribute can be updated at a time"""
 
         splarg = arg.split()
-        saved_inst = storage.all()
         if len(splarg) == 0:
             print("**class name missing**")
         elif len(splarg) < 2:
@@ -102,10 +116,10 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         elif len(splarg) < 4:
             print("** value missing **")
-        elif splarg[0] not in storage.classes:
+        elif splarg[0] not in self.allowed_classes:
             print("** class doesn't exist **")
         else:
-             key = "{}.{}".format(splarg[0], splarg[1])
+            key = "{}.{}".format(splarg[0], splarg[1])
             instances = storage.all()
             if key not in instances:
                 print("** no instance found **")
