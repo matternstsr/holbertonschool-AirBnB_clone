@@ -77,19 +77,15 @@ class HBNBCommand(cmd.Cmd):
 
         splarg = arg.split()
         inst_list = []
-        if len(splarg) > 0:
-            if splarg[0] not in HBNBCommand.__classes.keys():
-                print("** class doesn't exist **")
-            else:
-                instances = storage.all(splarg[0])
-                for key,value in instances.items():
-                    if slarg[0] == key:
-                        inst_list.append(value)
-                    print(inst_list)
+        if len(splarg) == 0:
+            for instance in storage.all().values():
+                inst_list.append(str(instance))
+        elif splarg[0] not in storage.classes:
+            print("** class doesn't exist **")
         else:
-            instances = storage.all()
-            for key, value in instances.items():
-                inst_list.append(value)
+            for key, value in storage.all().items():
+                if key.split('.')[0] == splarg[0]:
+                    inst_list.append(str(value))
             print(inst_list)
 
     def do_update(self, arg):
