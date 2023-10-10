@@ -2,18 +2,13 @@
 """Defines a Class HBNBCommand"""
 import cmd
 from datetime import datetime
+from models import storage
 from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
     """ Defines the class HBNBCommand"""
-    intro = 'Welcome to HOlberton BNB, type help or ? to list commands.\n'
+    intro = 'Welcome to Holberton BNB, type help or ? to list commands.\n'
     prompt = '(hbnb) '
 
     def do_quit(self, arg):
@@ -34,14 +29,12 @@ class HBNBCommand(cmd.Cmd):
         splarg = arg.split()
         if len(splarg) == 0:
             print("**class name missing**")
-        elif splarg[0] not in HBNBCommand.__classes.keys():
+        elif splarg[0] not in storage.classes:
             print("** class doesn't exist **")
         else:
-            for key, value in HBNBCommnad.__classes.items():
-                if splarg[0] == key:
-                    splarg[0] = value
-            print(eval(splarg[0])().id)
-            storage.save()
+            new_instance = storage.classes[splarg[0]]()
+            new_instance.save()
+            print(new_instance.id)
 
     def do_show(self, arg):
         """Prints a string represention of class and id"""
@@ -92,12 +85,16 @@ class HBNBCommand(cmd.Cmd):
             if splarg[0] not in HBNBCommand.__classes.keys():
                 print("** class doesn't exist **")
             else:
-                for key,value in storage.all():
+                instances = storage.all(splarg[0])
+                for key,value in instances.items():
                     if slarg[0] == key:
-                        inst_list.append(key, value)
+                        inst_list.append(value)
+                    print(inst_list)
         else:
-            for key, value in storage.all():
-                inst_list.append(key, value)
+            instances = storage.all()
+            for key, value in instances.items():
+                inst_list.append(value)
+            print(inst_list)
 
     def do_update(self, arg):
         """ Updates the specified attribute of a class, only one
@@ -123,10 +120,10 @@ class HBNBCommand(cmd.Cmd):
             splarg[3] = int(splarg[3])
         elif splarg[3].replace('.', '', 1).isdigit():
             splar[3] = float(splarg[3])
-        else:
-            setattr(inst_data, args[2], args[3])
-            setattr(inst_data, 'updated_at', datetime.now())
-            storage.save()
+            
+        setattr(inst_data, args[2], args[3])
+        setattr(inst_data, 'updated_at', datetime.now())
+        storage.save()
 
 
 if __name__ == '__main__':
