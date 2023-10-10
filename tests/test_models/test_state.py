@@ -2,6 +2,7 @@
 """Test State"""
 import unittest
 from models.state import State
+from models.base_model import BaseModel
 """from models.base_model import BaseModel
 from models.city import City
 from models.place import Place
@@ -30,7 +31,7 @@ class Teststate(unittest.TestCase):
 
     def test_module_doc(self):
         """ check for module documentation """
-        self.assertTrue(len(state.__doc__) > 0)
+        self.assertTrue(len(State.__doc__) > 0)
 
     def test_class_doc(self):
         """ check for documentation """

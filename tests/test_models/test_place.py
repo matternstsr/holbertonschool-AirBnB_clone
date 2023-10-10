@@ -25,7 +25,7 @@ class Testplace(unittest.TestCase):
 
     def test_module_doc(self):
         """ check for module documentation """
-        self.assertTrue(len(place.__doc__) > 0)
+        self.assertTrue(len(Place.__doc__) > 0)
 
     def test_class_doc(self):
         """ check for documentation """
