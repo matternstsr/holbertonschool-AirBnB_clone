@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Defines a Class HBNBCommand"""
 import cmd
+from datetime import datetime
 from models import BaseModel
 from models import User
 from models import State
@@ -98,7 +99,34 @@ class HBNBCommand(cmd.Cmd):
         for key, value in storage.all():
             inst_list.append(key, value)
 
+    def do_update(self, arg):
+        """ Updates the specified attribute of a class, only one
+        attribute can be updated at a time"""
 
+        splarg = arg.split()
+        saved_inst = storage.all()
+        item_key = "{}.{}".format(splarg[0], splarg[1])
+        if len(splarg) == 0:
+            print("**class name missing**")
+        elif len(splarg) < 2:
+            print("** instance id missing **")
+        elif len(splarg) < 3:
+            print("** attribute name missing **")
+        elif len(splarg) < 4:
+            print("** value missing **")
+        elif splarg[0] not in HBNBCommand.__classes.keys():
+            print("** class doesn't exist **")
+        elif item_key not in saved_inst.keys:
+            print("** no instance found **")
+        inst_data = storage.all().get(item_key)
+        if splarg[3].isdigit():
+            splarg[3] = int(splarg[3])
+        elif splarg[3].replace('.', '', 1).isdigit():
+            splar[3] = float(splarg[3])
+        else:
+            setattr(inst_data, args[2], args[3])
+            setattr(inst_data, 'updated_at', datetime.now())
+            storage.save()
 
 
 
