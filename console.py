@@ -40,20 +40,18 @@ class HBNBCommand(cmd.Cmd):
         """Prints a string represention of class and id"""
 
         splarg = arg.split()
-        saved_inst = storage.all()
         if len(splarg) == 0:
             print("**class name missing**")
+        elif splarg[0] not in storage.classes:
+            print("** class doesn't exist **")
         elif len(splarg) < 2:
             print("** instance id missing **")
-        elif splarg[0] not in HBNBCommand.__classes.keys():
-            print("** class doesn't exist **")
-        for key, value in HBNBCommnad.__classes.items():
-                if splarg[0] == key:
-                    splarg[0] = value
-        if "{}.{}".format(splarg[0], splarg[1]) not in saved_inst.keys:
-            print("** no instance found **")
         else:
-            print(saved_inst["{}.{}".format(splarg[0], splarg[1])])
+            key = "{}.{}".format(splarg[0], splarg[1])
+            if key in storage.all().keys():
+                print(storage.all()[key])
+            else:
+                print("** no instance found **")
 
     def do_destroy(self, arg):
         """Deletes a specified instance of an Object"""
