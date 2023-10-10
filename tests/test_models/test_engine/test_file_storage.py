@@ -9,7 +9,6 @@ from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 
 
-
 class TestFileStorage(unittest.TestCase):
     """class TestFileStorage"""
 
@@ -105,17 +104,17 @@ class TestFileStorage(unittest.TestCase):
         """Attempt to call save with an argument is not a BaseModel instance"""
         with self.assertRaises(TypeError):
             storage_instance.save("not_a_base_model_instance")
-    
+
     def test_all_with_None(self):
         """Test if all method raises TypeError with None argument"""
         with self.assertRaises(TypeError):
             self.storage.all(None)
-    
+
     def test_new_with_None(self):
         """Test if new method raises TypeError with None argument"""
         with self.assertRaises(TypeError):
             self.storage.new(None, None)
-        
+
     def test_save_with_None(self):
         """Test if save method raises TypeError with None argument"""
         with self.assertRaises(TypeError):
