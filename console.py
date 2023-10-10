@@ -41,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
 
         splarg = arg.split()
         if len(splarg) == 0:
-            print("**class name missing**")
+            print("** class name missing **")
         elif splarg[0] not in self.allowed_classes:
             print("** class doesn't exist **")
         else:
@@ -54,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
 
         splarg = arg.split()
         if len(splarg) == 0:
-            print("**class name missing**")
+            print("** class name missing **")
         elif splarg[0] not in self.allowed_classes:
             print("** class doesn't exist **")
         elif len(splarg) < 2:
@@ -71,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
 
         splarg = arg.split()
         if len(splarg) == 0:
-            print("**class name missing**")
+            print("** class name missing **")
         elif splarg[0] not in self.allowed_classes:
             print("** class doesn't exist **")
         elif len(splarg) < 2:
@@ -109,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
 
         splarg = arg.split()
         if len(splarg) == 0:
-            print("**class name missing**")
+            print("** class name missing **")
         elif len(splarg) < 2:
             print("** instance id missing **")
         elif len(splarg) < 3:
