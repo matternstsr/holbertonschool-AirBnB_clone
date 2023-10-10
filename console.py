@@ -2,18 +2,13 @@
 """Defines a Class HBNBCommand"""
 import cmd
 from datetime import datetime
-from models import BaseModel
-from models import User
-from models import State
-from models import City
-from models import Amenity
-from models import Place
-from models import Review
+from models import storage
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
     """ Defines the class HBNBCommand"""
-    intro = 'Welcome to HOlberton BNB, type help or ? to list commands.\n'
+    intro = 'Welcome to Holberton BNB, type help or ? to list commands.\n'
     prompt = '(hbnb) '
 
     def do_quit(self, arg):
@@ -34,70 +29,64 @@ class HBNBCommand(cmd.Cmd):
         splarg = arg.split()
         if len(splarg) == 0:
             print("**class name missing**")
-        elif splarg[0] not in HBNBCommand.__classes.keys():
+        elif splarg[0] not in storage.classes:
             print("** class doesn't exist **")
         else:
-            for key, value in HBNBCommnad.__classes.items():
-                if splarg[0] == key:
-                    splarg[0] = value
-            print(eval(splarg[0])().id)
-            storage.save()
+            new_instance = storage.classes[splarg[0]]()
+            new_instance.save()
+            print(new_instance.id)
 
     def do_show(self, arg):
         """Prints a string represention of class and id"""
 
         splarg = arg.split()
-        saved_inst = storage.all()
         if len(splarg) == 0:
             print("**class name missing**")
+        elif splarg[0] not in storage.classes:
+            print("** class doesn't exist **")
         elif len(splarg) < 2:
             print("** instance id missing **")
-        elif splarg[0] not in HBNBCommand.__classes.keys():
-            print("** class doesn't exist **")
-        for key, value in HBNBCommnad.__classes.items():
-                if splarg[0] == key:
-                    splarg[0] = value
-        if "{}.{}".format(splarg[0], splarg[1]) not in saved_inst.keys:
-            print("** no instance found **")
         else:
-            print(saved_inst[{}.{}.format(splarg[0], splarg[1])])
+            key = "{}.{}".format(splarg[0], splarg[1])
+            if key in storage.all().keys():
+                print(storage.all()[key])
+            else:
+                print("** no instance found **")
 
     def do_destroy(self, arg):
         """Deletes a specified instance of an Object"""
 
         splarg = arg.split()
-        saved_inst = storage.all()
         if len(splarg) == 0:
             print("**class name missing**")
+        elif splarg[0] not in storage.classes:
+            print("** class doesn't exist **")
         elif len(splarg) < 2:
             print("** instance id missing **")
-        elif splarg[0] not in HBNBCommand.__classes.keys():
-            print("** class doesn't exist **")
-        for key, value in HBNBCommnad.__classes.items():
-                if splarg[0] == key:
-                    splarg[0] = value
-        if "{}.{}".format(splarg[0], splarg[1]) not in saved_inst.keys:
-            print("** no instance found **")
         else:
-            del saved_inst[{}.{}.format(splarg[0], splarg[1])]
-            storage.save()
+            key = "{}.{}".format(splarg[0], splarg[1])
+            if key in storage.all().keys():
+                del instances[key]
+                storage.save()
+            else:
+                print("** no instance found **")
 
     def do_all(self, arg):
         """Prints a list of all instances of all classes, or all
             instances of a specified class"""
 
-    splarg = arg.split()
-    inst_list = []
-    if len(splarg) > 0:
-        if splarg[0] not in HBNBCommand.__classes.keys():
+        splarg = arg.split()
+        inst_list = []
+        if len(splarg) == 0:
+            for instance in storage.all().values():
+                inst_list.append(str(instance))
+        elif splarg[0] not in storage.classes:
             print("** class doesn't exist **")
         else:
-            for key,value in storage.all():
-                if slarg[0] == key:
-                    inst_list.append(key, value)
-    else:
-        for key, value in storage.all():
-            inst_list.append(key, value)
+            for key, value in storage.all().items():
+                if key.split('.')[0] == splarg[0]:
+                    inst_list.append(str(value))
+            print(inst_list)
 
     def do_update(self, arg):
         """ Updates the specified attribute of a class, only one
@@ -105,7 +94,6 @@ class HBNBCommand(cmd.Cmd):
 
         splarg = arg.split()
         saved_inst = storage.all()
-        item_key = "{}.{}".format(splarg[0], splarg[1])
         if len(splarg) == 0:
             print("**class name missing**")
         elif len(splarg) < 2:
@@ -114,20 +102,17 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         elif len(splarg) < 4:
             print("** value missing **")
-        elif splarg[0] not in HBNBCommand.__classes.keys():
+        elif splarg[0] not in storage.classes:
             print("** class doesn't exist **")
-        elif item_key not in saved_inst.keys:
-            print("** no instance found **")
-        inst_data = storage.all().get(item_key)
-        if splarg[3].isdigit():
-            splarg[3] = int(splarg[3])
-        elif splarg[3].replace('.', '', 1).isdigit():
-            splar[3] = float(splarg[3])
         else:
-            setattr(inst_data, args[2], args[3])
-            setattr(inst_data, 'updated_at', datetime.now())
-            storage.save()
-
+             key = "{}.{}".format(splarg[0], splarg[1])
+            instances = storage.all()
+            if key not in instances:
+                print("** no instance found **")
+            else:
+                instance = instances[key]
+                setattr(instance, splarg[2], splarg[3])
+                instance.save()
 
 
 if __name__ == '__main__':
