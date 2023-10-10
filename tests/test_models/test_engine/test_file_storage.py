@@ -120,6 +120,29 @@ class TestFileStorage(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.storage.save(None)
 
+    def test_file_path_type(self):
+        """Test if the file path attribute is a string"""
+        self.assertIsInstance(self.storage._FileStorage__file_path, str)
 
+    def test_objects_type(self):
+        """Test if the objects attribute is a dictionary"""
+        self.assertIsInstance(self.storage.all(), dict)
+    
+    def test_file_path_private(self):
+        """Test if the file path attribute is private (starts with an underscore)"""
+        self.assertTrue(hasattr(self.storage, '_FileStorage__file_path'))
+
+    def test_objects_private(self):
+        """Test if the objects attribute is private (starts with an underscore)"""
+        self.assertTrue(hasattr(self.storage, '_FileStorage__objects'))
+
+    def test_file_path_type(self):
+        """Test if the __file_path attribute is of type str"""
+        self.assertEqual(type(models.storage._FileStorage__file_path), str)
+
+    def test_objects_types(self):
+        """Test if the objects attribute is of type dict"""
+        self.assertEqual(type(models.storage._FileStorage__objects), dict)
+        
 if __name__ == '__main__':
     unittest.main()
