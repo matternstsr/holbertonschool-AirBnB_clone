@@ -94,7 +94,6 @@ class HBNBCommand(cmd.Cmd):
 
         splarg = arg.split()
         saved_inst = storage.all()
-        item_key = "{}.{}".format(splarg[0], splarg[1])
         if len(splarg) == 0:
             print("**class name missing**")
         elif len(splarg) < 2:
@@ -103,19 +102,17 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         elif len(splarg) < 4:
             print("** value missing **")
-        elif splarg[0] not in HBNBCommand.__classes.keys():
+        elif splarg[0] not in storage.classes:
             print("** class doesn't exist **")
-        elif item_key not in saved_inst.keys:
-            print("** no instance found **")
-        inst_data = storage.all().get(item_key)
-        if splarg[3].isdigit():
-            splarg[3] = int(splarg[3])
-        elif splarg[3].replace('.', '', 1).isdigit():
-            splar[3] = float(splarg[3])
-            
-        setattr(inst_data, args[2], args[3])
-        setattr(inst_data, 'updated_at', datetime.now())
-        storage.save()
+        else:
+             key = "{}.{}".format(splarg[0], splarg[1])
+            instances = storage.all()
+            if key not in instances:
+                print("** no instance found **")
+            else:
+                instance = instances[key]
+                setattr(instance, splarg[2], splarg[3])
+                instance.save()
 
 
 if __name__ == '__main__':
