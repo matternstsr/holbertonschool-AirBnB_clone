@@ -13,7 +13,6 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """ Defines the class HBNBCommand"""
-    intro = 'Welcome to Holberton BNB, type help or ? to list commands.\n'
     prompt = '(hbnb) '
     allowed_classes = {
         'BaseModel': BaseModel,
@@ -42,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
 
         splarg = arg.split()
         if len(splarg) == 0:
-            print("**class name missing**")
+            print("** class name missing **")
         elif splarg[0] not in self.allowed_classes:
             print("** class doesn't exist **")
         else:
@@ -55,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
 
         splarg = arg.split()
         if len(splarg) == 0:
-            print("**class name missing**")
+            print("** class name missing **")
         elif splarg[0] not in self.allowed_classes:
             print("** class doesn't exist **")
         elif len(splarg) < 2:
@@ -72,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
 
         splarg = arg.split()
         if len(splarg) == 0:
-            print("**class name missing**")
+            print("** class name missing **")
         elif splarg[0] not in self.allowed_classes:
             print("** class doesn't exist **")
         elif len(splarg) < 2:
