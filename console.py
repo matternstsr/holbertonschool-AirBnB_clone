@@ -95,6 +95,7 @@ class HBNBCommand(cmd.Cmd):
         if len(splarg) == 0:
             for instance in storage.all().values():
                 inst_list.append(str(instance))
+            print(inst_list)
         elif splarg[0] not in self.allowed_classes:
             print("** class doesn't exist **")
         else:
@@ -124,6 +125,10 @@ class HBNBCommand(cmd.Cmd):
             if key not in instances:
                 print("** no instance found **")
             else:
+                if splarg[3].isdigit():
+                    splarg[3] = int(splarg[3])
+                elif splarg[3].replace('.', '', 1).isdigit():
+                    splarg[3] = float(splarg[3])
                 instance = instances[key]
                 setattr(instance, splarg[2], splarg[3])
                 instance.save()
