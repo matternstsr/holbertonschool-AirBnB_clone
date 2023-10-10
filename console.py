@@ -9,10 +9,11 @@ from models import Amenity
 from models import Place
 from models import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """ Defines the class HBNBCommand"""
     intro = 'Welcome to HOlberton BNB, type help or ? to list commands.\n'
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
 
     def do_quit(self, arg):
         """Exits the Console by typing 'quit'"""

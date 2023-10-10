@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """FileStorage unittests"""
 import unittest
+import models
 import time
 import os
 from os import remove
@@ -28,6 +29,7 @@ class TestFileStorage(unittest.TestCase):
         if os.path.exists("file.json"):
             os.remove("file.json")
 
+    @classmethod
     def tearDown(self):
         """teardown"""
         try:
@@ -90,6 +92,33 @@ class TestFileStorage(unittest.TestCase):
         self.assertIsNotNone(FileStorage.save.__doc__)
         self.assertTrue(FileStorage.reload.__doc__)
         self.assertIsNotNone(FileStorage.reload.__doc__)
+
+    def test_file_storage_type(self):
+        """Test that the storage instance is of the correct type"""
+        storage_instance = FileStorage()
+        self.assertIsInstance(storage_instance, FileStorage)
+
+    def test_save_method_type_error(self):
+        """Test that save method raises TypeError with incorrect arguments"""
+        storage_instance = FileStorage()
+        """Attempt to call save with an argument is not a BaseModel instance"""
+        with self.assertRaises(TypeError):
+            storage_instance.save("not_a_base_model_instance")
+
+    def test_all_with_None(self):
+        """Test if all method raises TypeError with None argument"""
+        with self.assertRaises(TypeError):
+            self.storage.all(None)
+
+    def test_new_with_None(self):
+        """Test if new method raises TypeError with None argument"""
+        with self.assertRaises(TypeError):
+            self.storage.new(None, None)
+
+    def test_save_with_None(self):
+        """Test if save method raises TypeError with None argument"""
+        with self.assertRaises(TypeError):
+            self.storage.save(None)
 
 
 if __name__ == '__main__':
