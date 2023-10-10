@@ -2,7 +2,7 @@
  <p><img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20231010%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20231010T130402Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=d8729bf254b9d83fe12789526454085201f0d5c6db7871dbb092306020fa9bec" alt="" loading='lazy' style="" /></p>
 
 ## Introduction
-> This README is for the AirBnB clone - The console at Holberton. It countains the requirements, list of files, Examples on how use, and Flowcharts.
+> This README is for the AirBnB clone - The console at Holberton. It countains the requirements, list of files, and Examples on how use.
 
 ### Requirements
 - Allowed editors: vi, vim, emacs
@@ -15,6 +15,7 @@
 - All modules should be documented
 - All classes should be documented
 - All functions should be documented
+- Python 3.4.3 or later
 
 #### Python Unit Tests
 - Allowed editors: vi, vim, emacs
@@ -50,3 +51,88 @@
 |user.py| Contains all attribute and methods for Class user|
 |console.py| File for creating and running an interactive console|
 |AUTHORS| File containing authors of the project|
+|commands.txt| File containing commands that run using the console in Non-interactive mode|
+
+
+
+### Interactive mode
+
+To run the console in *interactive* mode type:
+
+```$ ./console.py```
+
+This prompt will appear:
+
+```(hbnb) ```
+
+where you can type commands and get output. For example:
+
+```bash
+(hbnb) all
+["[User] (00155f6d-b153-4740-bb49-a00abf2863b6) {'id': '00155f6d-b153-4740-bb49-a00abf2863b6', 'created_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451703), 'updated_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451710), 'first_name': 'Betty', 'last_name': 'Bar', 'email': 'airbnb@mail.com', 'password': 'root'}", "[User] (8d277805-bae6-4279-8e5e-7c80ca608e02) {'id': '8d277805-bae6-4279-8e5e-7c80ca608e02', 'created_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451946), 'updated_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451951), 'first_name': 'John', 'email': 'airbnb2@mail.com', 'password': 'root'}"]
+```
+
+### Non-interactive mode
+
+The same commands can be used to run non-interactive mode with some modifications will produce the same results as above:
+
+```bash
+$ echo "all" | ./console.py
+(hbnb) ["[User] (00155f6d-b153-4740-bb49-a00abf2863b6) {'id': '00155f6d-b153-4740-bb49-a00abf2863b6', 'created_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451703), 'updated_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451710), 'first_name': 'Betty', 'last_name': 'Bar', 'email': 'airbnb@mail.com', 'password': 'root'}", "[User] (8d277805-bae6-4279-8e5e-7c80ca608e02) {'id': '8d277805-bae6-4279-8e5e-7c80ca608e02', 'created_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451946), 'updated_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451951), 'first_name': 'John', 'email': 'airbnb2@mail.com', 'password': 'root'}"]
+```
+
+You can also use a file that contains the commands you want to run:
+```bash
+$ cat commands.txt
+all User
+```
+
+```bash
+$ cat commands.txt | ./console.py
+(hbnb) ["[User] (00155f6d-b153-4740-bb49-a00abf2863b6) {'id': '00155f6d-b153-4740-bb49-a00abf2863b6', 'created_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451703), 'updated_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451710), 'first_name': 'Betty', 'last_name': 'Bar', 'email': 'airbnb@mail.com', 'password': 'root'}", "[User] (8d277805-bae6-4279-8e5e-7c80ca608e02) {'id': '8d277805-bae6-4279-8e5e-7c80ca608e02', 'created_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451946), 'updated_at': datetime.datetime(2023, 10, 10, 11, 3, 21, 451951), 'first_name': 'John', 'email': 'airbnb2@mail.com', 'password': 'root'}"]
+```
+
+### Storage
+
+Instances of classes are serialized into a JSON string format and stored in a file named "file.json" located in the project's root directory. Any changes made to these objects, whether they are additions, deletions, or updates, are automatically reflected in this JSON file. Essentially, this JSON file acts as a basic database, allowing the data to persist and be accessible across different sessions or executions of the program.
+
+### Tests
+[unittest module].(https://docs.python.org/3.4/library/unittest.html)
+
+Testing is essential when developing a robust program. That's why we've incorporated a comprehensive testing suite using Python's 
+
+To run the entire unittest suite do this command from the root directory:
+
+If you want to run tests individually, an example would be:
+
+```bash
+$ python3 -m unittest tests/test_models/test_base_model.py
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.003s
+
+OK
+```
+
+```bash
+$ python3 -m unittest discover tests
+............................................................
+----------------------------------------------------------------------
+Ran 60 tests in 0.017s
+
+OK
+```
+
+### Supported Commands
+
+Name | Description | Use
+-------- | ----------- |-------- |
+help | Displays help information for a command | help [command]
+quit | Exits/quits the program | quit
+EOF | Exits the program when files are passed into the program | N/A
+create | Creates a new instance of a specified class | create [class_name]
+show | Prints the string representation of an instance | show [class_name] [id]
+destroy | Deletes an instance | destroy [class_name] [id]
+all | Prints the string representation of all instances of a class| all or all [class_name] [id]
+update | Adds or modifies attributes of an instance | update [class_name] [id] [attribute] [value]
+
