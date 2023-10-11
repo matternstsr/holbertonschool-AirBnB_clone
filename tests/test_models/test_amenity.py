@@ -6,12 +6,6 @@ from models.base_model import BaseModel
 from models import storage
 import os
 
-"""from models.city import City
-from models.user import User
-from models.place import Place
-from models.review import Review
-from models.state import State"""
-
 
 class Testamenity(unittest.TestCase):
     """unit test for amenity class"""
@@ -63,3 +57,7 @@ class Testamenity(unittest.TestCase):
         """ Test field attributes of user """
         my_Amenity = Amenity()
         self.assertTrue(type(my_Amenity.name) is str)
+
+
+if __name__ == '__main__':
+    unittest.main()
