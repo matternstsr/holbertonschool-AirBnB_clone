@@ -44,7 +44,7 @@ class Testuser(unittest.TestCase):
     def test_field_types(self):
         """ Test field attributes of user """
         my_user = User()
-        self.assertTrue(type(my_user.email) == str)
-        self.assertTrue(type(my_user.password) == str)
-        self.assertTrue(type(my_user.first_name) == str)
-        self.assertTrue(type(my_user.last_name) == str)
+        self.assertTrue(type(my_user.email) is str)
+        self.assertTrue(type(my_user.password) is str)
+        self.assertTrue(type(my_user.first_name) is str)
+        self.assertTrue(type(my_user.last_name) is str)
