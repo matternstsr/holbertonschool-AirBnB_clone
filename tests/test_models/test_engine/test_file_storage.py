@@ -1,13 +1,11 @@
 #!/usr/bin/python3
 """FileStorage unittests"""
-import unittest
-import models
-import time
 import os
-from os import remove
-from models.engine.file_storage import FileStorage
+import unittest
+import uuid
+from datetime import datetime
 from models.base_model import BaseModel
-
+from models.engine.file_storage import FileStorage
 
 class TestFileStorage(unittest.TestCase):
     """class TestFileStorage"""
@@ -30,7 +28,7 @@ class TestFileStorage(unittest.TestCase):
             os.remove("file.json")
 
     @classmethod
-    def tearDown(self):
+    def tearDown(cls):
         """teardown"""
         try:
             os.remove("file.json")
@@ -68,22 +66,22 @@ class TestFileStorage(unittest.TestCase):
     def test_save_method_type_error(self):
         """Test that save method raises TypeError with incorrect arguments"""
         storage_instance = FileStorage()
-        """Attempt to call save with an argument is not a BaseModel instance"""
+        """Attempt to call save with an argument that is not a BaseModel instance"""
         with self.assertRaises(TypeError):
             storage_instance.save("not_a_base_model_instance")
 
     def test_all_with_None(self):
-        """Test if all method raises TypeError with None argument"""
+        """Test if the all method raises TypeError with None argument"""
         with self.assertRaises(TypeError):
             self.storage.all(None)
 
     def test_new_with_None(self):
-        """Test if new method raises TypeError with None argument"""
+        """Test if the new method raises TypeError with None argument"""
         with self.assertRaises(TypeError):
             self.storage.new(None, None)
 
     def test_save_with_None(self):
-        """Test if save method raises TypeError with None argument"""
+        """Test if the save method raises TypeError with None argument"""
         with self.assertRaises(TypeError):
             self.storage.save(None)
 
@@ -105,11 +103,32 @@ class TestFileStorage(unittest.TestCase):
 
     def test_file_path_type(self):
         """Test if the __file_path attribute is of type str"""
-        self.assertEqual(type(models.storage._FileStorage__file_path), str)
+        self.assertEqual(type(self.storage._FileStorage__file_path), str)
 
     def test_objects_types(self):
         """Test if the objects attribute is of type dict"""
-        self.assertEqual(type(models.storage._FileStorage__objects), dict)
-        
+        self.assertEqual(type(self.storage._FileStorage__objects), dict)
+  
+    def test_base_model_id_is_string(self):
+        """UUID format testing."""
+        bm = BaseModel()
+        self.assertIsInstance(bm.id, str)
+
+    def test_base_model_uuid_good_format(self):
+        """Tests if UUID is in the correct format."""
+        bm = BaseModel()
+        self.assertIsInstance(uuid.UUID(bm.id), uuid.UUID)
+
+    def test_base_model_created_at_is_datetime(self):
+        """Datetime test."""
+        bm = BaseModel()
+        self.assertIsInstance(bm.created_at, datetime)
+
+    def test_base_model_updated_at_is_datetime(self):
+        """Datetime test."""
+        bm = BaseModel()
+        self.assertIsInstance(bm.updated_at, datetime)
+
+
 if __name__ == '__main__':
     unittest.main()
