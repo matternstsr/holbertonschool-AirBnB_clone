@@ -4,8 +4,7 @@ from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    """Defines a class, Review"""
-
+    """ Class 'Review' inherits from Class 'BaseModel' """
     place_id = ""
     user_id = ""
     text = ""
