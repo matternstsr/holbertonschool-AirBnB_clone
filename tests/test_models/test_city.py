@@ -29,7 +29,7 @@ class Testcity(unittest.TestCase):
 
     def test_module_doc(self):
         """ check for module documentation """
-        self.assertTrue(len(city.__doc__) > 0)
+        self.assertTrue(len(City.__doc__) > 0)
 
     def test_class_doc(self):
         """ check for documentation """
