@@ -36,7 +36,7 @@
 
 .locations:hover .popover {display: inline-block;}
 
-.filter_amenities:hover .popover {display: inline-block;}
+.amenities:hover .popover {display: inline-block;}
 
 ul {
 	list-style-type: none;
