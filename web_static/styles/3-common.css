@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #484848;}
+
+link[rel="icon"] {
+    position: absolute;
+    left: -9999px;}
