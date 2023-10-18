@@ -13,9 +13,8 @@ header {
 	height: 100px; /* Adjust the height as needed */
 }
 }
-#header_logo {
-	height: 100%;
-	width: 142px;
-	background-repeat: no-repeat;
-	background-position: center;
-	margin-left: 20px;}
+.logo {
+	width: 100px; 
+	height: 100px;
+	background-image: url('../images/icon.png'); 
+	background-size: cover;}
