@@ -1,3 +1,15 @@
+header {
+    background-image: url('../images/logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 70px; 
+}
+
+.logo {
+    width: 200px; 
+    height: 100px; 
+}
+
 .places {
 	display: block;
 	margin: 45px auto;
@@ -48,10 +60,18 @@ article h2 {
 
 .amenities .popover {opacity: .99;}
 
+
+.locations {
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+	width: 25%;
+	margin-left: 45px;
+	border-right: 1px solid #DDDDDD;}
+
 .amenities {
-    display: inline-block;
-    vertical-align: middle;
-    height: 100%;
-    width: 25%;
-    /* Remove margin-left: 45px; */
-}
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+	width: 25%;
+	margin-left: 45px;}
