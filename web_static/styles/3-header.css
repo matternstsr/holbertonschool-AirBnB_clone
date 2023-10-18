@@ -1,12 +1,12 @@
 header {
-	background-image: url('../images/logo.png');
 	background-color:white;
 	background-position: 20px;
-	background-repeat: no-repeat;
 	height: 70px;
 	width: 100%;
 	border-bottom: 1px solid #CCCCCC;}
 
 .logo {
-	width: 100px; 
-	height: 100px;}
+	width: 200px; 
+	height: 100px;
+	background-image: url('../images/logo.png');
+	background-repeat: no-repeat;}
